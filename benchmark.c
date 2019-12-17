@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,8 +20,8 @@ static inline double gettime() {
 }
 
 long cpu_freq() {
-  FILE *cpu =popen(CPU_FREQ, "r");
-  if (!cpu) 
+  FILE *cpu = popen(CPU_FREQ, "r");
+  if (!cpu)
     return -1;
 
   char buf[50] = {0};
@@ -42,12 +43,14 @@ int main(int argc, char **argv) {
     detectchar(buf, TARGET);
   }
   double slow_stop = gettime();
+  assert(*(char *)detectchar(buf, TARGET) == TARGET);
 
   double fast_start = gettime();
   for (size_t i = 0; i < RUNS; i++) {
     rawmemchr(buf, TARGET);
   }
   double fast_stop = gettime();
+  assert(*(char *)rawmemchr(buf, TARGET) == TARGET);
 
   long freq = cpu_freq();
   long slow_cycles = (slow_stop - slow_start) * freq;
