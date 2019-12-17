@@ -1,6 +1,6 @@
 void *detectchar(const void *src_void, int c) {
-  unsigned char d = c;
-  while (*(int *)src_void++ != d)
+  const unsigned char d = c, *src = (const unsigned char *)src_void;
+  for (; *src != d; src++)
     ;
-  return (void *)src_void;
+  return (void *)src;
 }
