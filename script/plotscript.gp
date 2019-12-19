@@ -6,5 +6,5 @@ set key left
 set output "result.png"
 
 plot \
-"data.txt" using 1:2 with linespoints linewidth 2 title "orig", \
-"data.txt" using 1:3 with linespoints linewidth 2 title "rawmemchr"
+"data.txt" using 1:2 with linespoints linewidth 2 title slow, \
+"data.txt" using 1:3 with linespoints linewidth 2 title fast
