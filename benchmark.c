@@ -55,7 +55,9 @@ int main(int argc, char **argv) {
   long freq = cpu_freq();
   long slow_cycles = (slow_stop - slow_start) * freq;
   long fast_cycles = (fast_stop - fast_start) * freq;
-  printf("%ld %ld\n", slow_cycles, fast_cycles);
+  long slow_CPE = slow_cycles / dist;
+  long fast_CPE = fast_cycles / dist;
+  printf("%ld %ld %ld %ld\n", slow_cycles, fast_cycles, slow_CPE, fast_CPE);
 
   return 0;
 }
